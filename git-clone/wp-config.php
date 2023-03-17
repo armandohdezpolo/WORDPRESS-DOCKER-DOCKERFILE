@@ -63,6 +63,8 @@ define( 'DB_CHARSET', 'utf8' );
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
+
+//DEFINIR EL HOST DE REDIS
 define( 'WP_REDIS_HOST', 'redis' );
 define( 'WP_REDIS_PORT', 6379 );
 //define( 'WP_REDIS_PASSWORD', 'secret' );
@@ -71,6 +73,7 @@ define( 'WP_REDIS_READ_TIMEOUT', 1 );
 
 // change the database for each site to avoid cache collisions
 // values 0-15 are valid in a default redis config.
+//SE ALMACENARÁ EN LA BASE DE DATOS NUMERO 0 DE REDIS
 define( 'WP_REDIS_DATABASE', 0 );
 
 

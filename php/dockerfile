@@ -28,3 +28,4 @@ RUN  --mount=type=bind,from=mlocati/php-extension-installer,source=/usr/bin/inst
 #USER www-data
 
 WORKDIR /var/www/wordpress
+#CMD ["sh", "-c", "chmod -R 777 /var/log/nginx && chown -R www-data:www-data /var/www/wordpress"]

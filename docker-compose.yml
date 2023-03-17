@@ -5,9 +5,13 @@ services:
   db:
     image: mysql:latest
     volumes:
+      #MONTAR EL ARCHIVO wordpress.sql COMO BD
       - ./git-clone/wordpress.sql:/docker-entrypoint-initdb.d/wordpress.sql
+      #PARA PERSISTENCIA EN LA BBDD
       - db_data:/var/lib/mysql
     environment:
+      #VARIABLES DE ENTORNO CREDENCIALES ACCESO A BBDD.
+      #EL SERVIDOR DE MYSQL UTILIZARÁ ESTAS VARIABLES; CREARÁ TAMBIÉN EL USUARIO "user"
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
       MYSQL_USER: user
@@ -22,13 +26,16 @@ services:
     #image: nginx:latest
     #ports:
     #  - '80:80'
-    build: 
+    build:
+      #SE USA UN DOCKERFILE PARA PODER AUTOMARIZAR EL COMANDO chown Y CAMBIAR USUARIO DE LA CARPETA /var/www/wordpress A www-data
       dockerfile: ./nginx/dockerfile
     restart: always
     volumes:
+      #PARA COGER TODA LA INFORMACION DE WORDPRESS Y MOVERLO A /var/www/wordpress
       - ./git-clone:/var/www/wordpress
+      #PARA SUSTITUIR EL FICHERO DE CONFIGURACIÓN POR EL NUESTRO MODIFICADO
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/chown.sh:/etc/nginx/conf.d/chown.sh
+    #USER 0=root; PARA QUE PUEDA EJECUTAR EL COMANDO chown SIN CAGARSE
     user: "0:0"
     networks:
       - wordpress
@@ -38,8 +45,10 @@ services:
     build: 
       dockerfile: ./php/dockerfile
     volumes:
+      #PHP NECESITA TAMBIÉN ACCEDER A LOS FICHEROS DE WORDPRESS PORQUE ES EL QUE SE ENCARGA DE COMPILAR SU CODIGO
       - ./git-clone:/var/www/wordpress
     environment:
+      #PHP NECESITA ACCEDER A LA BD PARA PODER VER EL CONTENIDO DE PÁGINAS, POST, PLUGGINS, ETC
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: user
@@ -52,15 +61,20 @@ services:
       - nginx
     image: varnish:latest
     ports:
+      #ES EL QUE RECIBE LAS PETICIONES WEB
       - 80:80
     restart: always
     user: root
     volumes:
+      #CONFIGURACION DE VARNISH MODIFICADA; DONDE REDIRIGE HACIA LA NGINX
       - ./varnish/default.vcl:/etc/varnish/default.vcl
     tmpfs:
+      #DIRECTORIO DONDE SE ALMACENARA LA INFORMACION CACHEADA
       - /var/lib/varnish:exec
     environment:
+      #CANTIDAD DE MEMORIA PARA ALMACENAR LA INFORMACION CACHEADA
       - VARNISH_SIZE=2G
+    #300 ES EL TIEMPO MÁXIMO QUE PARA GUARDAR LA INFORMACION EN CACHE
     command: "-p default_keep=300"
 
     networks:

@@ -1,5 +1,5 @@
 FROM nginx:latest
-
+MAINTAINER = "armando"
 
 #PARA CAMBIAR EL USUARIO Y GRUPO DE /var/www/wordpress a www-data
 CMD ["sh", "-c", "chmod -R 777 /var/log/nginx && chown -R www-data:www-data /var/www/wordpress && nginx -g 'daemon off;'"]
