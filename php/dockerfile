@@ -1,0 +1,30 @@
+FROM php:7.4-fpm
+LABEL MAINTAINER="kerjox"
+
+# Install PHP externsions for Wordpress
+
+RUN  --mount=type=bind,from=mlocati/php-extension-installer,source=/usr/bin/install-php-extensions,target=/usr/local/bin/install-php-extensions \
+      install-php-extensions \
+        json \
+        mysqli \
+        curl \
+        dom \
+        exif \
+        fileinfo \
+        hash \
+        imagick \
+        mbstring \
+        openssl \
+        pcre \
+        xml \
+        zip \
+        memcached \
+        opcache \
+        redis
+
+#RUN usermod -u 1000 www-data \
+#    && groupmod -g 1000 www-data
+
+#USER www-data
+
+WORKDIR /var/www/wordpress

@@ -1,0 +1,54 @@
+# Minimal configuration, no VCL
+# Maximum number of open files (for ulimit -n)
+NFILES=131072
+
+# Locked shared memory (for ulimit -l)
+# Default log size is 82MB + header
+MEMLOCK=82000
+#
+######################################################################
+#Alternative 1, Minimal configuration, no VCL
+######################################################################
+#DAEMON_OPTS="-a :80 \
+#        -T localhost:6082 \
+#        -f /etc/varnish/default.vcl \
+#        -S /etc/varnish/secret \
+#        -s malloc,512m"
+#
+######################################################################
+#Alternative 2, Minimal configuration assigning storage size from disk
+######################################################################
+#DAEMON_OPTS="-a :80,:443 \
+#            -T 172.31.77.26:6082 \
+#            -f /etc/varnish/default.vcl \
+#            -S /etc/varnish/secret \
+#            -t 120 \
+#            -p thread_pools=4 \
+#            -p thread_pool_min=100  \
+#            -p thread_pool_max=1000 \
+#            -p listen_depth=128 \
+#            -p thread_pool_add_delay=2\
+#            -p lru_interval=20 \
+#            -h classic,72227  \
+#            -p session_linger=120 \
+#            -p sess_workspace=32768 \
+#            -p connect_timeout=600 \
+#            -s file,/var/lib/varnish/varnish_storage.bin,50%"
+#
+#		 
+######################################################################
+#Alternative 3, Minimal configuration assigning memory size from RAM
+######################################################################
+DAEMON_OPTS="-a :80,:443 \
+             -T 172.31.76.136:6082 \
+             -t 120 \
+             -f /etc/varnish/default.vcl \
+             -u varnish -g varnish \
+             -S /etc/varnish/secret \
+             -p thread_pool_add_delay=2 \
+             -p thread_pools=4 \
+             -p thread_pool_min=100 \
+             -p thread_pool_max=1000 \
+             -p session_linger=100 \
+             -p sess_workspace=262144 \
+             -s malloc,1G"

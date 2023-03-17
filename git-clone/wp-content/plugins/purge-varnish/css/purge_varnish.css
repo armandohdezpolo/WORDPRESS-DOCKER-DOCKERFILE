@@ -1,0 +1,25 @@
+.purge_varnish{width:98%;padding-left:2px}
+.purge_varnish table{width:98%}
+.purge_varnish .screen{background-color:#fff;padding-bottom:30px}
+.purge_varnish h2{background-image:url(../images/purge16x16.png);background-position:left 8px center;background-repeat:no-repeat;margin:15px 0 0;padding:9px 0 9px 30px}
+.purge_varnish .screen .desc{padding-left:23px;color:#777}
+.terminal_desc{padding-top:3px;color:#777}
+.purge_varnish table th{text-align:right;vertical-align:text-top}
+.purge_varnish table td{text-align:left;vertical-align:text-top}
+.purge_varnish input[type=text],.purge_varnish select{width:350px;border:1px solid #0073AA;border-left:4px solid #1d8ccc}
+.purge_varnish input[type=checkbox]{border:2px solid #0073AA}
+.purge_varnish code{border-left:4px solid #1d8ccc;padding:4px;font-size:14px}
+.purge_varnish input[type=submit]{-moz-user-select:none;background-color:#1d8ccc;border:0;border-radius:3px;cursor:pointer;display:inline-block;padding:11px 15px;color:#FFF;text-align:center;transition-duration:.3s;transition-property:background,border-color;transition-timing-function:ease-in}
+.purge_varnish ul.tab{list-style-type:none;margin:0;padding:0;overflow:hidden;border-top:none;background-color:#f1f1f1}
+.purge_varnish ul.tab li{float:left;border-right:#eee}
+.purge_varnish ul.tab li a{display:inline-block;color:#000;text-align:center;padding:10px 30px;text-decoration:none;transition:.3s;font-size:17px}
+.purge_varnish ul.tab li a:hover{background-color:#ddd}
+.purge_varnish .active,ul.tab li a:focus{background-color:#ccc}
+.purge_varnish table.expiration tr td:first-child,tr.expiration td{background-color:#fbfbfb}
+.purge_varnish .tabcontent{border-style:none!important;padding:6px 12px;border:1px solid #ccc;border-top:none}
+.purge_varnish table.expiration tr td{border-bottom:1px solid #ccc;padding-bottom:20px}
+.purge_varnish tr.expiration td{padding-top:20px}
+.purge_varnish .tablinks{font-weight:700;font-size:20px}
+#wpbody-content .purge_varnish dd,li{margin-bottom:0}
+.purge_varnish .hide_custom_url,.tabcontent{display:none}
+.purge_varnish .show_custom_url{display:block}
